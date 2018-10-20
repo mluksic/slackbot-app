@@ -6,41 +6,55 @@
 -->
 <ion-header>
 
-  <ion-navbar color="primary">
-    <ion-title> //USER// </ion-title> <!-- GET Current User name-->
-  </ion-navbar>
+    <ion-navbar color="primary">
+        <ion-title> //USER// </ion-title> <!-- GET Current User name-->
+    </ion-navbar>
 
 </ion-header>
 
 
 <ion-content fixed>
 
-  <ion-grid fixed>
-    <ion-card>
-      <ion-card-header>
-        Monthly Kudos progress
-      </ion-card-header>
-      <ion-card-content>
-        <canvas #barCanvas></canvas>
-      </ion-card-content>
-    </ion-card>
-    <ion-card>
-      <ion-card-content>
-        <ion-card-header>
-          Total count
-        </ion-card-header>
-        <div padding>
-          <h1 class="kudosDetaile">{{ kudosNumber?.carrotNumber }} X <ion-icon name="ios-nutrition-outline"></ion-icon>
-          </h1>
-          <h1 class="kudosDetaile">{{ kudosNumber?.pizzaNumber }} X <ion-icon name="ios-pizza-outline"></ion-icon>
-          </h1>
-          <h1 class="kudosDetaile">{{ kudosNumber?.trophyNumber }} X <ion-icon name="ios-trophy-outline"></ion-icon>
-          </h1>
-        </div>
-      </ion-card-content>
-    </ion-card>
+    <ion-grid fixed>
+        <ion-card>
+            <ion-card-header>
+                Monthly Kudos progress
+            </ion-card-header>
+            <ion-card-content>
+                <canvas #barCanvas></canvas>
+            </ion-card-content>
+        </ion-card>
+        <ion-card>
+            <ion-card-content>
+                <ion-card-header>
+                    Total count
+                </ion-card-header>
+                <ion-row padding>
+                    <ion-col *ngIf="kudosNumber?.carrotNumber > 0">
+                        <h1 class="kudosDetaile">{{ kudosNumber?.carrotNumber }} X <ion-icon name="ios-nutrition-outline"></ion-icon>
+                        </h1>
+                    </ion-col>
+                    <ion-col *ngIf="kudosNumber?.pizzaNumber > 0">
+                        <h1 class=" kudosDetaile">{{kudosNumber?.pizzaNumber }} X <ion-icon name="ios-pizza-outline"></ion-icon>
+                        </h1>
+                    </ion-col>
+                    <ion-col *ngIf="kudosNumber?.trophyNumber > 0">
+                        <h1 class=" kudosDetaile">{{kudosNumber?.trophyNumber }} X <ion-icon name="ios-trophy-outline"></ion-icon>
+                        </h1>
+                    </ion-col>
+                    <ion-col *ngIf="kudosNumber?.trophyNumber > 0">
+                        <h1 class=" kudosDetaile">{{kudosNumber?.trophyNumber }} X <ion-icon name="ios-trophy-outline"></ion-icon>
+                        </h1>
+                    </ion-col>
+                </ion-row>
+            </ion-card-content>
+        </ion-card>
 
-
-  </ion-grid>
-
+        <ion-card *ngIf="kudosNumber?.shitNumber > 0">
+            <ion-card-content>
+                <button ion-button full color="dirty">Shitty section</button>
+                <ion-note>If you enter shitty section, you might see dirty things.</ion-note>
+            </ion-card-content>
+        </ion-card>
+    </ion-grid>
 </ion-content>

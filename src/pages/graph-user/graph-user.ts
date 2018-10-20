@@ -75,9 +75,11 @@ export class GraphUserPage {
   public getKudosNumber() {
     //
     this.kudosNumber = {
-      carrotNumber: 2,
-      pizzaNumber: 1,
-      trophyNumber: 4
+      carrotNumber: 1,
+      pizzaNumber: 2,
+      trophyNumber: 3,
+      shitNumber: 1
     };
+    console.log(this.kudosNumber.shitNumber);
   }
 }
