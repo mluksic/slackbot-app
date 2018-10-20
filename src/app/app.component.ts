@@ -4,11 +4,15 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { GraphPage } from '../pages/graph/graph';
+import { LoginPage } from '../pages/login/login';
+import { LoginMemberPage } from '../pages/login-member/login-member';
+import { GraphUserPage } from '../pages/graph-user/graph-user';
+
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage: any = GraphPage;
+  rootPage: any = GraphUserPage;
   constructor(
     platform: Platform,
     statusBar: StatusBar,
