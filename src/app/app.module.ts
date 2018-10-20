@@ -7,12 +7,29 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { GraphPage } from '../pages/graph/graph';
+import { LoginPage } from '../pages/login/login';
+import { LoginMemberPage } from '../pages/login-member/login-member';
+import { GraphUserPage } from '../pages/graph-user/graph-user';
 
 @NgModule({
-  declarations: [MyApp, HomePage, GraphPage],
+  declarations: [
+    MyApp,
+    HomePage,
+    GraphPage,
+    LoginPage,
+    LoginMemberPage,
+    GraphUserPage
+  ],
   imports: [BrowserModule, IonicModule.forRoot(MyApp)],
   bootstrap: [IonicApp],
-  entryComponents: [MyApp, HomePage, GraphPage],
+  entryComponents: [
+    MyApp,
+    HomePage,
+    GraphPage,
+    LoginPage,
+    LoginMemberPage,
+    GraphUserPage
+  ],
   providers: [
     StatusBar,
     SplashScreen,
