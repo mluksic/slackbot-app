@@ -10,6 +10,8 @@ import { GraphPage } from '../pages/graph/graph';
 import { LoginPage } from '../pages/login/login';
 import { LoginMemberPage } from '../pages/login-member/login-member';
 import { GraphUserPage } from '../pages/graph-user/graph-user';
+import { GraphUserShittyPage } from '../pages/graph-user-shitty/graph-user-shitty';
+import { KudoPage } from '../pages/kudo/kudo';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { GraphUserPage } from '../pages/graph-user/graph-user';
     GraphPage,
     LoginPage,
     LoginMemberPage,
-    GraphUserPage
+    GraphUserPage,
+    GraphUserShittyPage,
+    KudoPage
   ],
   imports: [BrowserModule, IonicModule.forRoot(MyApp)],
   bootstrap: [IonicApp],
@@ -28,7 +32,9 @@ import { GraphUserPage } from '../pages/graph-user/graph-user';
     GraphPage,
     LoginPage,
     LoginMemberPage,
-    GraphUserPage
+    GraphUserPage,
+    GraphUserShittyPage,
+    KudoPage
   ],
   providers: [
     StatusBar,

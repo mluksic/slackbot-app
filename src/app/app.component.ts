@@ -7,12 +7,14 @@ import { GraphPage } from '../pages/graph/graph';
 import { LoginPage } from '../pages/login/login';
 import { LoginMemberPage } from '../pages/login-member/login-member';
 import { GraphUserPage } from '../pages/graph-user/graph-user';
+import { GraphUserShittyPage } from '../pages/graph-user-shitty/graph-user-shitty';
+import { KudoPage } from '../pages/kudo/kudo';
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage: any = GraphUserPage;
+  rootPage: any = KudoPage;
   constructor(
     platform: Platform,
     statusBar: StatusBar,

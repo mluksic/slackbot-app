@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Chart } from 'chart.js';
 
 /**
- * Generated class for the GraphUserPage page.
+ * Generated class for the GraphUserShittyPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -11,23 +11,40 @@ import { Chart } from 'chart.js';
 
 @IonicPage()
 @Component({
-  selector: 'page-graph-user',
-  templateUrl: 'graph-user.html'
+  selector: 'page-graph-user-shitty',
+  templateUrl: 'graph-user-shitty.html'
 })
-export class GraphUserPage {
+export class GraphUserShittyPage {
   @ViewChild('barCanvas')
   lineCanvas;
 
   lineChart: any;
-  kudosNumber: any;
+  shitNumber: any;
+  quotesArray: any[] = [];
+  randomQuote: string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.quotesArray.push('I just had bad month.');
+    this.quotesArray.push('I had to much work, you know hard projects ...');
+    this.quotesArray.push('At least I am a good person!');
+    this.quotesArray.push('IT WAS NOT A BUG, IT WAS A FEATURE!!!');
+    this.quotesArray.push('I want to thank Stack overflow for my degree.');
+    this.quotesArray.push('But I !FIXED his problem.');
+
+    // immediately show one random quote;
+    this.quotesArray[Math.floor(Math.random() * this.quotesArray.length)];
+
+    setInterval(() => {
+      this.randomQuote = this.quotesArray[
+        Math.floor(Math.random() * this.quotesArray.length)
+      ]; // this'll get the quote depending on your array length
+    }, 5000); // needs to be in milliseconds
+  }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad GraphUserPage');
+    console.log('ionViewDidLoad GraphUserShittyPage');
     this.getUserGraph();
-    this.getKudosNumber();
-    //console.log();
+    this.getShitNumber();
   }
 
   public getUserGraph() {
@@ -72,14 +89,8 @@ export class GraphUserPage {
     });
   }
 
-  public getKudosNumber() {
-    //
-    this.kudosNumber = {
-      carrotNumber: 11,
-      pizzaNumber: 2,
-      trophyNumber: 3,
-      shitNumber: 1
-    };
-    console.log(this.kudosNumber.shitNumber);
+  public getShitNumber() {
+    this.shitNumber = new Array(5); //First value is number of shitty emoji for one person.
+    console.log(this.shitNumber);
   }
 }

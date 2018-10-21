@@ -21,21 +21,27 @@
 
         <ion-card>
             <ion-card-header>
-                Doughnut Chart
+                Last 10 List
             </ion-card-header>
             <ion-card-content>
-                <canvas #doughnutCanvas></canvas>
+                <ion-list>
+                    <ion-item *ngFor="let kudos of lastKudos">
+                        <!--(click)="itemSelected(item)"-->
+                        <p><code class="highlighter-rouge">{{ kudos.receiver }}</code> received <ion-icon name='{{ kudos.value }}'></ion-icon>
+                            from <code class="highlighter-rouge">{{ kudos.sender }}</code> "{{ kudos.message}}"</p>
+                    </ion-item>
+                </ion-list>
             </ion-card-content>
         </ion-card>
 
-        <ion-card>
+        <!--<ion-card>
             <ion-card-header>
                 Line Chart
             </ion-card-header>
             <ion-card-content>
                 <canvas #lineCanvas></canvas>
             </ion-card-content>
-        </ion-card>
+        </ion-card>-->
 
     </ion-grid>
 </ion-content>
