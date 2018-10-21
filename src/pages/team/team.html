@@ -26,6 +26,17 @@
                 <!-- <canvas #lineCanvas></canvas> -->
                 <canvas #barCanvas></canvas>
             </ion-card-content>
+            <ion-buttons end>
+                <button ion-button (click)="getTeamsScoreWithParams('weekly=true')">
+                    Weekly
+                </button>
+                <button ion-button (click)="getTeamsScoreWithParams('monthly=true')">
+                    Monthly
+                </button>
+                <button ion-button (click)="getTeamsScoreWithParams('yearly=true')">
+                    Yearly
+                </button>
+            </ion-buttons>
         </ion-card>
         <ion-card>
             <ion-card-content>
