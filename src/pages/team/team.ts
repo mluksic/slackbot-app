@@ -126,4 +126,22 @@ export class TeamPage {
         }
     }
 
+    getTeamsScoreWithParams = (params) => {
+        this.dataServiceProvider
+        .getCollection(
+            'scoring/employees?team=' + this.team + "&" + params 
+        )
+        .subscribe(data => {
+            if (data !== undefined) {
+                this.teamScores = data;
+                this.teamScoresPlain = data.map((member) => {
+                    return member.totalValue;
+                });
+                this.getTeamsGraph();
+            } else {
+                this.teamScores = null;
+            }
+        });
+    }
+
 }

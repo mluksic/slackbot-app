@@ -51,7 +51,7 @@ export class GraphUserPage {
             });
     }
 
-    getTeamsScore = () => {
+    getTeamsScore = (params = '') => {
         this.dataServiceProvider
             .getCollection('scoring/teams')
             .subscribe(data => {
@@ -137,5 +137,21 @@ export class GraphUserPage {
         this.navCtrl.push(TeamPage, {
             team: team
         });
+    }
+
+    getTeamsScoreWithParams = (params) => {
+        this.dataServiceProvider
+            .getCollection('scoring/teams?' + params)
+            .subscribe(data => {
+                if (data !== undefined) {
+                    this.teamScores = data;
+                    this.teamScoresPlain = data.map((team) => {
+                        return team.totalValue;
+                    });
+                    this.getTeamsGraph();
+                } else {
+                    this.teams = null;
+                }
+            });
     }
 }
