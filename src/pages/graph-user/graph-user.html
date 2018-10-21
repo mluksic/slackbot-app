@@ -30,16 +30,15 @@
                     Total count
                 </ion-card-header>
                 <ion-row padding>
-                    <ion-col *ngIf="kudosNumber?.carrotNumber > 0">
+                    <ion-col *ngIf="kudosNumber?.carrotNumber > 0 && kudosNumber?.carrotNumber <= 10">
                         <h1 class="kudosDetaile">{{ kudosNumber?.carrotNumber }} X <ion-icon name="ios-nutrition-outline"></ion-icon>
                         </h1>
                     </ion-col>
+                    <ion-col *ngIf="kudosNumber?.carrotNumber > 10">
+                        <ion-img width="70" height="70" src="../../assets/imgs/carrots.png" class="imgCarrot"></ion-img>
+                    </ion-col>
                     <ion-col *ngIf="kudosNumber?.pizzaNumber > 0">
                         <h1 class=" kudosDetaile">{{kudosNumber?.pizzaNumber }} X <ion-icon name="ios-pizza-outline"></ion-icon>
-                        </h1>
-                    </ion-col>
-                    <ion-col *ngIf="kudosNumber?.trophyNumber > 0">
-                        <h1 class=" kudosDetaile">{{kudosNumber?.trophyNumber }} X <ion-icon name="ios-trophy-outline"></ion-icon>
                         </h1>
                     </ion-col>
                     <ion-col *ngIf="kudosNumber?.trophyNumber > 0">
