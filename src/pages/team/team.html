@@ -6,7 +6,7 @@
         </button>
         <ion-title>Team</ion-title> <!-- GET Current User name-->
         <ion-buttons end>
-            <button ion-button color="danger" (click)="dataServiceProvider.logout()">
+            <button ion-button color="light" (click)="dataServiceProvider.logout()">
                 Logout
             </button>
         </ion-buttons>
@@ -46,12 +46,27 @@
                     </strong>
                 </ion-card-header>
                 <ion-list>
-                    <ion-item *ngFor="let score of teamScores" (click)="goToMemberDetailPage()">
+                    <ion-item *ngFor="let score of teamScores" (click)="goToMemberDetailPage(score._id.id)">
                         {{ score._id.firstName }} {{ score._id.lastName }}
                         <span ion-text item-end *ngFor="let kudo of score.kudos">
                             {{ kudo.count }} X
                             <ion-icon [name]="getIconForValue(kudo.value)"></ion-icon>
                         </span>
+                    </ion-item>
+                </ion-list>
+            </ion-card-content>
+        </ion-card>
+        <ion-card>
+            <ion-card-header>
+                <strong>Last 10 Kudos</strong>
+            </ion-card-header>
+            <ion-card-content>
+                <ion-list>
+                    <ion-item *ngFor="let kudo of lastKudos">
+                        <p><code class="highlighter-rouge">{{ kudo.receiver.firstName }}, {{ kudo.receiver.lastName }}</code>
+                            received <ion-icon [name]='getIconForValue(kudo.value)'></ion-icon>
+                            from <code class="highlighter-rouge">{{ kudo.sender.firstName }}, {{ kudo.sender.lastName }}</code>
+                            "{{ kudo.message}}"</p>
                     </ion-item>
                 </ion-list>
             </ion-card-content>

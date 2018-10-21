@@ -8,4 +8,17 @@ page-graph-user {
   .imgCarrot {
     background: #fff;
   }
+  ion-card-header {
+    font-weight: bold;
+  }
+  ion-icon {
+    font-size: 2em;
+  }
+  code {
+    padding: 2px 4px;
+    font-size: 90%;
+    color: #4d8cf4;
+    background-color: whitesmoke;
+    border-radius: 4px;
+  }
 }

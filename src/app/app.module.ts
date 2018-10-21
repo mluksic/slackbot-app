@@ -15,6 +15,7 @@ import { DataServiceProvider } from './providers/data-service/data-service';
 import { HttpModule } from '@angular/http';
 import { EmployeesPage } from '../pages/employees/employees';
 import { TeamPage } from '../pages/team/team';
+import { EmployeePage } from '../pages/employee/employee';
 
 @NgModule({
     declarations: [
@@ -26,6 +27,7 @@ import { TeamPage } from '../pages/team/team';
         GraphUserPage,
         EmployeesPage,
         TeamPage,
+        EmployeePage,
     ],
     imports: [
         BrowserModule,
@@ -43,6 +45,7 @@ import { TeamPage } from '../pages/team/team';
         GraphUserPage,
         EmployeesPage,
         TeamPage,
+        EmployeePage,
     ],
     providers: [
         StatusBar,

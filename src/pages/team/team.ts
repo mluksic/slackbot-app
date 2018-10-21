@@ -17,6 +17,7 @@ export class TeamPage {
     teamScores: any;
     teamScoresPlain = [];
     barChart: any;
+    lastKudos: any;
 
     constructor(
         public navCtrl: NavController,
@@ -60,6 +61,7 @@ export class TeamPage {
                         return member.totalValue;
                     });
                     this.getTeamsGraph();
+                    this.getLastTenKudos();
                 } else {
                     this.teamScores = null;
                 }
@@ -109,10 +111,24 @@ export class TeamPage {
         });
     }
 
-    goToMemberDetailPage = (member) => {
+    goToMemberDetailPage = (memberId) => {
+        console.log(memberId);
         this.navCtrl.push(EmployeePage, {
-            employee: member
+            employeeId: memberId
         })
+    }
+
+    getLastTenKudos = () => {
+        this.dataServiceProvider
+            .getCollection('scoring/lastKudos?' + this.team)
+            .subscribe(data => {
+                if (data !== undefined) {
+                    this.lastKudos = data;
+                    console.log(this.lastKudos);
+                } else {
+                    this.lastKudos = null;
+                }
+            });
     }
 
     getIconForValue = (value) => {
