@@ -4,7 +4,7 @@
         <button ion-button menuToggle>
             <ion-icon name="menu"></ion-icon>
         </button>
-        <ion-title>Leaderboards</ion-title> <!-- GET Current User name-->
+        <ion-title>Leaderboards</ion-title>
         <ion-buttons end>
             <button ion-button color="danger" (click)="dataServiceProvider.logout()">
                 Logout
@@ -20,10 +20,9 @@
     <ion-grid fixed>
         <ion-card>
             <ion-card-header>
-                Team Leaderboards
+                Employee detail
             </ion-card-header>
             <ion-card-content>
-                <!-- <canvas #lineCanvas></canvas> -->
                 <canvas #barCanvas></canvas>
             </ion-card-content>
         </ion-card>
@@ -35,19 +34,19 @@
                     </strong>
                 </ion-card-header>
                 <ion-list>
-                    <ion-item *ngFor="let team of teamScores" (click)="goToTeam(team)">
+                    <ion-item *ngFor="let team of teamKudos">
                         <ion-label>
-                            {{ team._id.name }}
+                            {{ team._id.team.name }}
                         </ion-label>
-                        <span ion-text item-end>Received: {{ team.totalValue }}</span>
                     </ion-item>
                 </ion-list>
             </ion-card-content>
         </ion-card>
+
     </ion-grid>
-</ion-content>¸
+</ion-content>
 
 <ion-tabs>
-    <ion-tab tabTitle="Employees" [root]="tab1Root"></ion-tab>
     <ion-tab tabTitle="Teams" [root]="tab1Root"></ion-tab>
+    <ion-tab tabTitle="Employees" [root]="tab2Root"></ion-tab>
 </ion-tabs>

@@ -1,1 +1,44 @@
-<ion-nav [root]="rootPage"></ion-nav>
+<ion-split-pane>
+    <ion-menu [content]="content">
+        <ion-header>
+            <ion-navbar color=primary>
+                <ion-title margin-left>
+                    <img src="../assets/imgs/celtra-logo.png" height="40">
+                </ion-title>
+            </ion-navbar>
+        </ion-header>
+
+        <ion-content color="primary">
+            <ion-list>
+                <ion-item>
+                    <p color="light">TOPŠIT APP</p>
+                </ion-item>
+            </ion-list>
+
+            <ion-list *ngIf="dataService.getCurrentRole() === 'ROLE_USER'">
+                <button menuClose ion-item *ngFor="let userPage of userPages" (click)="openPage(userPage)">
+                    <ion-icon margin-horizontal name="{{ userPage.icon }}"></ion-icon>
+                    {{ userPage.title }}
+                </button>
+            </ion-list>
+
+            <ion-list *ngIf="dataService.getCurrentRole() === 'ROLE_TEAM_LEAD'">
+                <button menuClose ion-item *ngFor="let teamLeadPage of teamLeadPages" (click)="openPage(teamLeadPage)">
+                    <ion-icon margin-horizontal name="{{ teamLeadPage.icon }}"></ion-icon>
+                    {{ teamLeadPage.title }}
+                </button>
+            </ion-list>
+
+            <ion-list *ngIf="dataService.getCurrentRole() === 'ROLE_MANAGER'">
+                <button menuClose ion-item *ngFor="let managerPage of managerPages" (click)="openPage(managerPage)">
+                    <ion-icon margin-horizontal name="{{ managerPage.icon }}"></ion-icon>
+                    {{ managerPage.title }}
+                </button>
+            </ion-list>
+
+        </ion-content>
+
+    </ion-menu>
+    <ion-nav #content [root]="rootPage" main></ion-nav>
+
+</ion-split-pane>

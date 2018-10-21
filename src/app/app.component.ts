@@ -1,30 +1,76 @@
-import { Component } from '@angular/core';
-import { Platform } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { Platform, Events, Nav } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-
-import { GraphPage } from '../pages/graph/graph';
 import { LoginPage } from '../pages/login/login';
+import { DataServiceProvider } from './providers/data-service/data-service';
 import { LoginMemberPage } from '../pages/login-member/login-member';
 import { GraphUserPage } from '../pages/graph-user/graph-user';
-import { GraphUserShittyPage } from '../pages/graph-user-shitty/graph-user-shitty';
-import { KudoPage } from '../pages/kudo/kudo';
+import { TeamPage } from '../pages/team/team';
 
 @Component({
-  templateUrl: 'app.html'
+    templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage: any = KudoPage;
-  constructor(
-    platform: Platform,
-    statusBar: StatusBar,
-    splashScreen: SplashScreen
-  ) {
-    platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
-      statusBar.styleDefault();
-      splashScreen.hide();
-    });
-  }
+    @ViewChild(Nav) nav: Nav;
+    rootPage: any = LoginPage;
+
+    managerPages: Array<{ title: any, component: any, icon: any }>;
+    teamLeadPages: Array<{ title: any, component: any, icon: any }>;
+    userPages: Array<{ title: any, component: any, icon: any }>;
+
+    constructor(
+        public events: Events,
+        platform: Platform,
+        statusBar: StatusBar,
+        splashScreen: SplashScreen,
+        public dataService: DataServiceProvider
+    ) {
+        platform.ready().then(() => {
+            statusBar.styleDefault();
+            splashScreen.hide();
+            if (this.dataService.isLoggedIn()) {
+                let role = this.dataService.getCurrentRole();
+                this.events.publish('user:login', role);
+            } else {
+                this.events.publish('user:logout');
+            }
+        });
+
+        this.listenToEvents();
+
+        this.managerPages = [
+            { title: "Leaderboards", component: LoginMemberPage, icon: 'paper' },
+            // { title: "Teams", component: TeamsPage, icon: 'bicycle' },
+        ];
+
+        this.teamLeadPages = [
+            { title: "Leaderboards", component: GraphUserPage, icon: 'paper' },
+            { title: "Teams", component: TeamPage, icon: 'bicycle' },
+        ];
+
+        this.userPages = [
+            { title: "Leaderboards", component: GraphUserPage, icon: 'paper' },
+            { title: "Team", component: TeamPage, icon: 'bicycle' },
+        ];
+    }
+
+    listenToEvents = () => {
+        this.events.subscribe('user:login', (role) => {
+            if (role !== undefined) {
+                this.nav.setRoot(GraphUserPage);
+            } else {
+                this.nav.setRoot(LoginMemberPage);
+            }
+        });
+
+        this.events.subscribe('user:logout', () => {
+            window.localStorage.clear();
+            this.nav.setRoot(LoginPage);
+        });
+    }
+
+    openPage = page => {
+        this.nav.setRoot(page.component);
+    }
 }
