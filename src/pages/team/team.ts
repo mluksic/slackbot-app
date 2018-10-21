@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { DataServiceProvider } from '../../app/providers/data-service/data-service';
 import { Chart } from 'chart.js';
+import { EmployeePage } from '../employee/employee';
 
 @Component({
     selector: 'page-team',
@@ -54,15 +55,10 @@ export class TeamPage {
             )
             .subscribe(data => {
                 if (data !== undefined) {
-                    console.log(data);
                     this.teamScores = data;
-                    console.log(this.teamScores, 'team-scores');
                     this.teamScoresPlain = data.map((member) => {
                         return member.totalValue;
                     });
-                    console.log(this.teamScoresPlain, 'before');
-
-                    console.log(this.teamScoresPlain, 'plain team');
                     this.getTeamsGraph();
                 } else {
                     this.teamScores = null;
@@ -111,6 +107,12 @@ export class TeamPage {
                 }
             }
         });
+    }
+
+    goToMemberDetailPage = (member) => {
+        this.navCtrl.push(EmployeePage, {
+            employee: member
+        })
     }
 
     getIconForValue = (value) => {

@@ -36,8 +36,8 @@ export class LoginPage {
         this.dataServiceProvider
             .getCollection('teams')
             .subscribe(data => {
-                if (data !== undefined) {
-                    this.teams = data;
+                if (data.docs !== undefined) {
+                    this.teams = data.docs;
                     this.empty = false;
                 } else {
                     this.teams = null;
