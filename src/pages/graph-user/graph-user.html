@@ -6,7 +6,7 @@
         </button>
         <ion-title>Leaderboards</ion-title> <!-- GET Current User name-->
         <ion-buttons end>
-            <button ion-button color="danger" (click)="dataServiceProvider.logout()">
+            <button ion-button color="light" (click)="dataServiceProvider.logout()">
                 Logout
             </button>
         </ion-buttons>
@@ -56,10 +56,20 @@
                 </ion-list>
             </ion-card-content>
         </ion-card>
+        <ion-card>
+            <ion-card-header>
+                Last 10 Kudos
+            </ion-card-header>
+            <ion-card-content>
+                <ion-list>
+                    <ion-item *ngFor="let kudo of lastKudos">
+                        <p><code class="highlighter-rouge">{{ kudo.receiver.firstName }}, {{ kudo.receiver.lastName }}</code>
+                            received <ion-icon [name]='getIconForValue(kudo.value)'></ion-icon>
+                            from <code class="highlighter-rouge">{{ kudo.sender.firstName }}, {{ kudo.sender.lastName }}</code>
+                            "{{ kudo.message}}"</p>
+                    </ion-item>
+                </ion-list>
+            </ion-card-content>
+        </ion-card>
     </ion-grid>
 </ion-content>¸
-
-<ion-tabs>
-    <ion-tab tabTitle="Employees" [root]="tab1Root"></ion-tab>
-    <ion-tab tabTitle="Teams" [root]="tab1Root"></ion-tab>
-</ion-tabs>

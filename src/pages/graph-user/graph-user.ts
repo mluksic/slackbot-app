@@ -2,7 +2,6 @@ import { Component, ViewChild } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Chart } from 'chart.js';
 import { DataServiceProvider } from '../../app/providers/data-service/data-service';
-import { EmployeesPage } from '../employees/employees';
 import { TeamPage } from '../team/team';
 
 @Component({
@@ -13,8 +12,6 @@ export class GraphUserPage {
     @ViewChild('barCanvas')
     barCanvas;
 
-    tab1Root = EmployeesPage;
-
     lineChart: any;
     barChart: any;
     member: any;
@@ -22,6 +19,7 @@ export class GraphUserPage {
     teams: any;
     teamScores: any;
     teamScoresPlain: any;
+    lastKudos: any;
 
     constructor(
         public navCtrl: NavController,
@@ -61,6 +59,7 @@ export class GraphUserPage {
                         return team.totalValue;
                     });
                     this.getTeamsGraph();
+                    this.getLastTenKudos();
                 } else {
                     this.teams = null;
                 }
@@ -137,6 +136,30 @@ export class GraphUserPage {
         this.navCtrl.push(TeamPage, {
             team: team
         });
+    }
+
+    getLastTenKudos = () => {
+        this.dataServiceProvider
+            .getCollection('scoring/lastKudos')
+            .subscribe(data => {
+                if (data !== undefined) {
+                    this.lastKudos = data;
+                    console.log(this.lastKudos);
+                } else {
+                    this.lastKudos = null;
+                }
+            });
+    }
+
+    getIconForValue = (value) => {
+        switch (value) {
+            case 1:
+                return 'ios-nutrition-outline';
+            case 2:
+                return 'ios-pizza-outline';
+            case 3:
+                return 'ios-trophy-outline';
+        }
     }
 
     getTeamsScoreWithParams = (params) => {

@@ -4,9 +4,9 @@
         <button ion-button menuToggle>
             <ion-icon name="menu"></ion-icon>
         </button>
-        <ion-title>Leaderboards</ion-title>
+        <ion-title>Employee detail</ion-title>
         <ion-buttons end>
-            <button ion-button color="danger" (click)="dataServiceProvider.logout()">
+            <button ion-button color="light" (click)="dataServiceProvider.logout()">
                 Logout
             </button>
         </ion-buttons>
@@ -20,28 +20,68 @@
     <ion-grid fixed>
         <ion-card>
             <ion-card-header>
-                Employee detail
+                <strong>Employee detail</strong>
             </ion-card-header>
             <ion-card-content>
-                <canvas #barCanvas></canvas>
+                <ion-card-header>
+                    {{ employee?.firstName }}, {{ employee?.lastName }}
+                </ion-card-header>
+
+                <ion-item>
+                    <ion-avatar item-start>
+                    </ion-avatar>
+                    <h2>{{ employee?.email }}</h2>
+                    <!-- <p>{{ employee? }}</p> -->
+                </ion-item>
             </ion-card-content>
         </ion-card>
+
+
         <ion-card>
             <ion-card-content>
                 <ion-card-header>
-                    <strong>
-                        Kudos
-                    </strong>
+                    <strong>Total count</strong>
                 </ion-card-header>
+                <ion-row padding>
+                    <ion-col *ngIf="memberKudos?.length > 0 && memberKudos.length <= 10">
+                        <h1 class="kudosDetaile">{{ memberKudos.length }} X <ion-icon name="ios-nutrition-outline"></ion-icon>
+                        </h1>
+                    </ion-col>
+                    <ion-col *ngIf="memberKudos?.length > 10">
+                        <ion-img width="70" height="70" src="../../assets/imgs/carrots.png" class="imgCarrot"></ion-img>
+                    </ion-col>
+                    <ion-col *ngIf="kudosNumber?.pizzaNumber > 0">
+                        <h1 class=" kudosDetaile">{{kudosNumber?.pizzaNumber }} X <ion-icon name="ios-pizza-outline"></ion-icon>
+                        </h1>
+                    </ion-col>
+                    <ion-col *ngIf="kudosNumber?.trophyNumber > 0">
+                        <h1 class=" kudosDetaile">{{kudosNumber?.trophyNumber }} X <ion-icon name="ios-trophy-outline"></ion-icon>
+                        </h1>
+                    </ion-col>
+                </ion-row>
+            </ion-card-content>
+        </ion-card>
+
+        <ion-card>
+            <ion-card-header>
+                <strong>Kudos</strong>
+            </ion-card-header>
+            <ion-card-content>
                 <ion-list>
                     <ion-item *ngFor="let kudo of memberKudos">
-                        <ion-label>
-                            {{ kudo._id }}
-                        </ion-label>
+                        <p><code class="highlighter-rouge">{{ kudo.receiver.firstName }}, {{ kudo.receiver.lastName }}</code>
+                            received <ion-icon [name]='getIconForValue(kudo.value)'></ion-icon>
+                            from <code class="highlighter-rouge">{{ kudo.sender.firstName }}, {{ kudo.sender.lastName }}</code>
+                            "{{ kudo.message}}"</p>
                     </ion-item>
                 </ion-list>
             </ion-card-content>
         </ion-card>
-
+        <ion-card>
+            <ion-card-content>
+                <button ion-button full color="dirty">Shitty section</button>
+                <ion-note>If you enter shitty section, you might see dirty things.</ion-note>
+            </ion-card-content>
+        </ion-card>
     </ion-grid>
 </ion-content>
