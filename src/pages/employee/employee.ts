@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { DataServiceProvider } from '../../app/providers/data-service/data-service';
+import { GraphUserShittyPage } from '../graph-user-shitty/graph-user-shitty';
 
 @Component({
     selector: 'page-employee',
@@ -60,6 +61,12 @@ export class EmployeePage {
             case 3:
                 return 'ios-trophy-outline';
         }
+    }
+
+    goToShitty = () => {
+        this.navCtrl.push(GraphUserShittyPage, {
+            employeeId: this.employeeId
+        });
     }
 
 }

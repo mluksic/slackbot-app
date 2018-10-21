@@ -16,6 +16,7 @@ import { HttpModule } from '@angular/http';
 import { EmployeesPage } from '../pages/employees/employees';
 import { TeamPage } from '../pages/team/team';
 import { EmployeePage } from '../pages/employee/employee';
+import { GraphUserShittyPage } from '../pages/graph-user-shitty/graph-user-shitty';
 
 @NgModule({
     declarations: [
@@ -28,6 +29,7 @@ import { EmployeePage } from '../pages/employee/employee';
         EmployeesPage,
         TeamPage,
         EmployeePage,
+        GraphUserShittyPage,
     ],
     imports: [
         BrowserModule,
@@ -46,6 +48,7 @@ import { EmployeePage } from '../pages/employee/employee';
         EmployeesPage,
         TeamPage,
         EmployeePage,
+        GraphUserShittyPage,
     ],
     providers: [
         StatusBar,

@@ -6,9 +6,9 @@
 -->
 <ion-header>
 
-  <ion-navbar color="primary">
-    <ion-title> //USER// </ion-title> <!-- GET Current User name-->
-  </ion-navbar>
+    <ion-navbar color="primary">
+        <ion-title> SHITS </ion-title> <!-- GET Current User name-->
+    </ion-navbar>
 
 </ion-header>
 
@@ -16,29 +16,36 @@
 
 <ion-content fixed>
 
-  <ion-grid fixed>
-    <ion-card>
-      <ion-card-header>
-        Monthly Shitty progress
-      </ion-card-header>
-      <ion-card-content>
-        <canvas #barCanvas></canvas>
-      </ion-card-content>
-    </ion-card>
-    <ion-card>
-      <ion-card-content>
-        <ion-card-header>
-          Shitty overview
-        </ion-card-header>
-        <ion-row padding>
-          <ion-col *ngFor="let shit of shitNumber">
-            <!--(click)="itemSelected(shit)"-->
-            <ion-img width="70" height="70" src="../../assets/imgs/shit.jpg" class="imgCarrot"></ion-img>
-          </ion-col>
-        </ion-row>
-        <ion-title *ngIf="shitNumber?.length > 2" ion-text color="primary" padding bold>{{randomQuote}}
-        </ion-title>
-      </ion-card-content>
-    </ion-card>
-  </ion-grid>
+    <ion-grid fixed>
+        <ion-card>
+            <ion-card-content>
+                <ion-card-header>
+                    Shitty overview
+                </ion-card-header>
+                <ion-row padding>
+                    <ion-img width="70" height="70" src="../../assets/imgs/shit.jpg" class="imgCarrot"></ion-img>
+                    <ion-col *ngFor="let shit of shittyKudos">
+                        <!--(click)="itemSelected(shit)"-->
+                    </ion-col>
+                </ion-row>
+                <ion-title *ngIf="shittyKudos?.length > 2" ion-text color="primary" padding bold>{{randomQuote}}
+                </ion-title>
+            </ion-card-content>
+        </ion-card>
+        <ion-card>
+            <ion-card-header>
+                <strong>Shitty Kudos</strong>
+            </ion-card-header>
+            <ion-card-content>
+                <ion-list>
+                    <ion-item *ngFor="let kudo of shittyKudos">
+                        <p><code class="highlighter-rouge">{{ kudo.receiver.firstName }}, {{ kudo.receiver.lastName }}</code>
+                            received <ion-icon [name]='getIconForValue(kudo.value)'></ion-icon>
+                            from <code class="highlighter-rouge">{{ kudo.sender.firstName }}, {{ kudo.sender.lastName }}</code>
+                            "{{ kudo.message}}"</p>
+                    </ion-item>
+                </ion-list>
+            </ion-card-content>
+        </ion-card>
+    </ion-grid>
 </ion-content>
