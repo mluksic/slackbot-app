@@ -40,11 +40,10 @@ export class GraphUserPage {
         this.dataServiceProvider
             .getCollection('teams')
             .subscribe(data => {
-                if (data !== undefined) {
-                    this.teams = data.map((team) => {
+                if (data.docs !== undefined) {
+                    this.teams = data.docs.map((team) => {
                         return team.name;
                     });
-                    console.log(this.teams);
                     this.getTeamsScore();
                 } else {
                     this.teams = null;
@@ -58,12 +57,9 @@ export class GraphUserPage {
             .subscribe(data => {
                 if (data !== undefined) {
                     this.teamScores = data;
-                    console.log(this.teamScores, 'team scores');
                     this.teamScoresPlain = data.map((team) => {
                         return team.totalValue;
                     });
-                    console.log(this.teamScores, 'non-plain');
-                    console.log(this.teamScoresPlain, 'plain');
                     this.getTeamsGraph();
                 } else {
                     this.teams = null;

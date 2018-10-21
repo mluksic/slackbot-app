@@ -34,26 +34,8 @@
                         Top team members
                     </strong>
                 </ion-card-header>
-                <!-- <ion-row padding>
-                    <ion-col *ngIf="kudosNumber?.carrotNumber > 0">
-                        <h1 class="kudosDetaile">{{ kudosNumber?.carrotNumber }} X <ion-icon name="ios-nutrition-outline"></ion-icon>
-                        </h1>
-                    </ion-col>
-                    <ion-col *ngIf="kudosNumber?.pizzaNumber > 0">
-                        <h1 class=" kudosDetaile">{{kudosNumber?.pizzaNumber }} X <ion-icon name="ios-pizza-outline"></ion-icon>
-                        </h1>
-                    </ion-col>
-                    <ion-col *ngIf="kudosNumber?.trophyNumber > 0">
-                        <h1 class=" kudosDetaile">{{kudosNumber?.trophyNumber }} X <ion-icon name="ios-trophy-outline"></ion-icon>
-                        </h1>
-                    </ion-col>
-                    <ion-col *ngIf="kudosNumber?.trophyNumber > 0">
-                        <h1 class=" kudosDetaile">{{kudosNumber?.trophyNumber }} X <ion-icon name="ios-trophy-outline"></ion-icon>
-                        </h1>
-                    </ion-col>
-                </ion-row> -->
                 <ion-list>
-                    <ion-item *ngFor="let score of teamScores">
+                    <ion-item *ngFor="let score of teamScores" (click)="goToMemberDetailPage()">
                         {{ score._id.firstName }} {{ score._id.lastName }}
                         <span ion-text item-end *ngFor="let kudo of score.kudos">
                             {{ kudo.count }} X
@@ -63,12 +45,5 @@
                 </ion-list>
             </ion-card-content>
         </ion-card>
-
-        <!-- <ion-card *ngIf="kudosNumber?.shitNumber > 0">
-            <ion-card-content>
-                <button ion-button full color="dirty">Shitty section</button>
-                <ion-note>If you enter shitty section, you might see dirty things.</ion-note>
-            </ion-card-content>
-        </ion-card> -->
     </ion-grid>
 </ion-content>

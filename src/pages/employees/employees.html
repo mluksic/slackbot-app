@@ -23,7 +23,6 @@
                 Team Leaderboards
             </ion-card-header>
             <ion-card-content>
-                <!-- <canvas #lineCanvas></canvas> -->
                 <canvas #barCanvas></canvas>
             </ion-card-content>
         </ion-card>
@@ -34,65 +33,15 @@
                         Top teams
                     </strong>
                 </ion-card-header>
-                <!-- <ion-row padding>
-                        <ion-col *ngIf="kudosNumber?.carrotNumber > 0">
-                            <h1 class="kudosDetaile">{{ kudosNumber?.carrotNumber }} X <ion-icon name="ios-nutrition-outline"></ion-icon>
-                            </h1>
-                        </ion-col>
-                        <ion-col *ngIf="kudosNumber?.pizzaNumber > 0">
-                            <h1 class=" kudosDetaile">{{kudosNumber?.pizzaNumber }} X <ion-icon name="ios-pizza-outline"></ion-icon>
-                            </h1>
-                        </ion-col>
-                        <ion-col *ngIf="kudosNumber?.trophyNumber > 0">
-                            <h1 class=" kudosDetaile">{{kudosNumber?.trophyNumber }} X <ion-icon name="ios-trophy-outline"></ion-icon>
-                            </h1>
-                        </ion-col>
-                        <ion-col *ngIf="kudosNumber?.trophyNumber > 0">
-                            <h1 class=" kudosDetaile">{{kudosNumber?.trophyNumber }} X <ion-icon name="ios-trophy-outline"></ion-icon>
-                            </h1>
-                        </ion-col>
-                    </ion-row> -->
                 <ion-list>
                     <ion-item *ngFor="let team of teamKudos">
                         <ion-label>
                             {{ team._id.team.name }}
                         </ion-label>
-                        <!-- <ion-col *ngIf="team.kudos">
-                                <h1 class=" kudosDetaile">
-                                    {{ team.kudos }} X
-                                    <ion-icon name="ios-nutrition-outline"></ion-icon>
-                                </h1>
-                            </ion-col>
-                            <ion-col *ngIf="team.kudos">
-                                <h1 class=" kudosDetaile">
-                                    {{ team.kudos.1 }} X
-                                    <ion-icon name="ios-pizza-outline"></ion-icon>
-                                </h1>
-                            </ion-col>
-                            <ion-col *ngIf="team.kudos">
-                                <h1 class=" kudosDetaile">
-                                    {{ team.kudos.2 }} X
-                                    <ion-icon name="ios-trophy-outline"></ion-icon>
-                                </h1>
-                            </ion-col>
-                            <ion-col *ngIf="team.kudos">
-                                <h1 class=" kudosDetaile">
-                                    {{ team.kudos.3 }} X
-                                    <ion-icon name="ios-trophy-outline"></ion-icon>
-                                </h1>
-                            </ion-col> -->
-
                     </ion-item>
                 </ion-list>
             </ion-card-content>
         </ion-card>
-
-        <!-- <ion-card *ngIf="kudosNumber?.shitNumber > 0">
-                <ion-card-content>
-                    <button ion-button full color="dirty">Shitty section</button>
-                    <ion-note>If you enter shitty section, you might see dirty things.</ion-note>
-                </ion-card-content>
-            </ion-card> -->
     </ion-grid>
 </ion-content>
 

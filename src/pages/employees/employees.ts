@@ -47,8 +47,8 @@ export class EmployeesPage {
         this.dataServiceProvider
             .getCollection('employees')
             .subscribe(data => {
-                if (data !== undefined) {
-                    this.employees = data;
+                if (data.docs !== undefined) {
+                    this.employees = data.docs;
                     this.getEmployeeScores();
                 } else {
                     this.employeeScore = null;
@@ -64,7 +64,7 @@ export class EmployeesPage {
                 datasets: [
                     {
                         label: '# of Kudos',
-                        data: [12, 19],
+                        data: this.employeeScore,
                         backgroundColor: [
                             'rgba(255, 99, 132, 0.2)',
                             'rgba(54, 162, 235, 0.2)',

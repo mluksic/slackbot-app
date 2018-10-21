@@ -30,13 +30,13 @@
             <ion-card-content>
                 <ion-card-header>
                     <strong>
-                        Top teams
+                        Kudos
                     </strong>
                 </ion-card-header>
                 <ion-list>
-                    <ion-item *ngFor="let team of teamKudos">
+                    <ion-item *ngFor="let kudo of memberKudos">
                         <ion-label>
-                            {{ team._id.team.name }}
+                            {{ kudo._id }}
                         </ion-label>
                     </ion-item>
                 </ion-list>
@@ -45,8 +45,3 @@
 
     </ion-grid>
 </ion-content>
-
-<ion-tabs>
-    <ion-tab tabTitle="Teams" [root]="tab1Root"></ion-tab>
-    <ion-tab tabTitle="Employees" [root]="tab2Root"></ion-tab>
-</ion-tabs>
