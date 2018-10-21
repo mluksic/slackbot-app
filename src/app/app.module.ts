@@ -10,36 +10,45 @@ import { GraphPage } from '../pages/graph/graph';
 import { LoginPage } from '../pages/login/login';
 import { LoginMemberPage } from '../pages/login-member/login-member';
 import { GraphUserPage } from '../pages/graph-user/graph-user';
-import { GraphUserShittyPage } from '../pages/graph-user-shitty/graph-user-shitty';
-import { KudoPage } from '../pages/kudo/kudo';
+import { HttpClientModule } from '@angular/common/http';
+import { DataServiceProvider } from './providers/data-service/data-service';
+import { HttpModule } from '@angular/http';
+import { EmployeesPage } from '../pages/employees/employees';
+import { TeamPage } from '../pages/team/team';
 
 @NgModule({
-  declarations: [
-    MyApp,
-    HomePage,
-    GraphPage,
-    LoginPage,
-    LoginMemberPage,
-    GraphUserPage,
-    GraphUserShittyPage,
-    KudoPage
-  ],
-  imports: [BrowserModule, IonicModule.forRoot(MyApp)],
-  bootstrap: [IonicApp],
-  entryComponents: [
-    MyApp,
-    HomePage,
-    GraphPage,
-    LoginPage,
-    LoginMemberPage,
-    GraphUserPage,
-    GraphUserShittyPage,
-    KudoPage
-  ],
-  providers: [
-    StatusBar,
-    SplashScreen,
-    { provide: ErrorHandler, useClass: IonicErrorHandler }
-  ]
+    declarations: [
+        MyApp,
+        HomePage,
+        GraphPage,
+        LoginPage,
+        LoginMemberPage,
+        GraphUserPage,
+        EmployeesPage,
+        TeamPage,
+    ],
+    imports: [
+        BrowserModule,
+        IonicModule.forRoot(MyApp),
+        HttpClientModule,
+        HttpModule,
+    ],
+    bootstrap: [IonicApp],
+    entryComponents: [
+        MyApp,
+        HomePage,
+        GraphPage,
+        LoginPage,
+        LoginMemberPage,
+        GraphUserPage,
+        EmployeesPage,
+        TeamPage,
+    ],
+    providers: [
+        StatusBar,
+        SplashScreen,
+        { provide: ErrorHandler, useClass: IonicErrorHandler },
+        DataServiceProvider,
+    ]
 })
-export class AppModule {}
+export class AppModule { }

@@ -1,40 +1,56 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, MenuController } from 'ionic-angular';
 import { LoginMemberPage } from '../login-member/login-member';
+import { DataServiceProvider } from '../../app/providers/data-service/data-service';
 
-/**
- * Generated class for the LoginPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
-@IonicPage()
 @Component({
-  selector: 'page-login',
-  templateUrl: 'login.html'
+    selector: 'page-login',
+    templateUrl: 'login.html'
 })
+
 export class LoginPage {
-  teams: any;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+    teams: any;
+    selectedTeam: any;
+    empty = false;
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
-    this.getTeams();
-  }
+    constructor(
+        public navCtrl: NavController,
+        public navParams: NavParams,
+        public dataServiceProvider: DataServiceProvider,
+        public menuCtrl: MenuController
+    ) { }
 
-  public getTeams() {
-    //API GET {URL}/teams
-    this.teams = [];
-    for (let i = 1; i < 10; i++) {
-      const team = {
-        _id: i,
-        name: 'test' + i
-      };
-      this.teams.push(team);
+    ionViewDidLoad = () => {
+        this.getTeams();
     }
-  }
-  public itemSelected(team) {
-    this.navCtrl.push(LoginMemberPage, { team: team });
-  }
+
+    ionViewWillEnter = () => {
+        this.menuCtrl.enable(false);
+    }
+
+    ionViewWillLeave = () => {
+        this.menuCtrl.enable(true);
+    }
+
+    getTeams = () => {
+        this.dataServiceProvider
+            .getCollection('teams')
+            .subscribe(data => {
+                if (data !== undefined) {
+                    this.teams = data;
+                    this.empty = false;
+                } else {
+                    this.teams = null;
+                    this.empty = true;
+                }
+            });
+    }
+
+    itemSelected = (team) => {
+        this.navCtrl.push(LoginMemberPage, { team: team });
+    }
+
+    compareFn(e1, e2): boolean {
+        return e1 && e2 ? e1.id === e2.id : e1 === e2;
+    }
 }

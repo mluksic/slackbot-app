@@ -1,26 +1,19 @@
-<!--
-  Generated template for the LoginPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
-  <ion-navbar color="primary">
-    <ion-title>Login</ion-title>
-  </ion-navbar>
+    <ion-navbar color="primary">
+        <ion-title>Select your team</ion-title>
+    </ion-navbar>
 
 </ion-header>
 
+<ion-content>
 
-<ion-content fixed>
-
-  <ion-grid fixed>
-    <ion-list>
-      <button ion-item *ngFor="let team of teams" (click)="itemSelected(team)">
-        <!-- click)="itemSelected(group)" -->
-        {{ team.name }}
-      </button>
+    <ion-list *ngIf="!empty">
+        <ion-item *ngFor="let team of teams" (click)="itemSelected(team)">
+            {{ team.name }}
+        </ion-item>
     </ion-list>
-  </ion-grid>
+    <ion-label *ngIf="empty">
+        No teams
+    </ion-label>
 </ion-content>

@@ -1,10 +1,24 @@
 {
-  "rules": {
-    "no-duplicate-variable": true,
-    "no-unused-variable": [true],
-    "quotemark": [true, "single"],
-    "no-duplicate-variable": true,
-    "max-line-length": [true, 100]
-  },
-  "rulesDirectory": ["node_modules/tslint-eslint-rules/dist/rules"]
+    "rules": {
+        "no-unused-variable": [
+            true
+        ],
+        "quotemark": [
+            true,
+            "single"
+        ],
+        "no-duplicate-variable": true,
+        "max-line-length": [
+            true,
+            100
+        ],
+        "indent": [
+            true,
+            "spaces",
+            4
+        ],
+    },
+    "rulesDirectory": [
+        "node_modules/tslint-eslint-rules/dist/rules"
+    ]
 }

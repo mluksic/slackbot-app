@@ -1,72 +1,71 @@
 import { Component, ViewChild } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { Chart } from 'chart.js';
 import { DataServiceProvider } from '../../app/providers/data-service/data-service';
-import { EmployeesPage } from '../employees/employees';
-import { TeamPage } from '../team/team';
+import { Chart } from 'chart.js';
 
 @Component({
-    selector: 'page-graph-user',
-    templateUrl: 'graph-user.html'
+    selector: 'page-team',
+    templateUrl: 'team.html',
 })
-export class GraphUserPage {
+export class TeamPage {
     @ViewChild('barCanvas')
     barCanvas;
 
-    tab1Root = EmployeesPage;
-
-    lineChart: any;
-    barChart: any;
-    member: any;
-    currentRole: any;
-    teams: any;
+    team: any;
+    teamMembers: any;
     teamScores: any;
-    teamScoresPlain: any;
+    teamScoresPlain = [];
+    barChart: any;
 
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams,
         public dataServiceProvider: DataServiceProvider
     ) {
-        this.member = this.navParams.data.member;
-        this.getRoleForCurrentMember(this.member);
+        this.team = window.localStorage.getItem('team');
+        if (this.team !== undefined) {
+            this.getTeamMembers();
+        }
     }
 
-    ionViewDidLoad() {
-        this.getTeams();
-    }
-
-    getTeams = () => {
+    getTeamMembers = () => {
         this.dataServiceProvider
-            .getCollection('teams')
+            .getItem(
+                'teams',
+                this.team + '/members'
+            )
             .subscribe(data => {
                 if (data !== undefined) {
-                    this.teams = data.map((team) => {
-                        return team.name;
+                    console.log(data);
+                    this.teamMembers = data.map((member) => {
+                        return member.firstName + ' ' + member.lastName;
                     });
-                    console.log(this.teams);
-                    this.getTeamsScore();
+                    this.getTeamScores();
                 } else {
-                    this.teams = null;
+                    this.teamMembers = null;
                 }
             });
     }
 
-    getTeamsScore = () => {
+    getTeamScores = () => {
         this.dataServiceProvider
-            .getCollection('scoring/teams')
+            .getCollection(
+                'scoring/employees?team=' + this.team
+            )
             .subscribe(data => {
                 if (data !== undefined) {
+                    console.log(data);
                     this.teamScores = data;
-                    console.log(this.teamScores, 'team scores');
-                    this.teamScoresPlain = data.map((team) => {
-                        return team.totalValue;
+                    console.log(this.teamScores, 'team-scores');
+                    this.teamScoresPlain = data.map((member) => {
+                        return member.totalValue;
                     });
-                    console.log(this.teamScores, 'non-plain');
-                    console.log(this.teamScoresPlain, 'plain');
+                    console.log(this.teamScoresPlain, 'before');
+
+                    console.log(this.teamScoresPlain, 'plain team');
                     this.getTeamsGraph();
                 } else {
-                    this.teams = null;
+                    this.teamScores = null;
                 }
             });
     }
@@ -75,7 +74,7 @@ export class GraphUserPage {
         this.barChart = new Chart(this.barCanvas.nativeElement, {
             type: 'bar',
             data: {
-                labels: this.teams,
+                labels: this.teamMembers,
                 datasets: [
                     {
                         label: '# of Kudos',
@@ -114,32 +113,15 @@ export class GraphUserPage {
         });
     }
 
-    getRoleForCurrentMember = (member) => {
-        if (member !== undefined) {
-            this.dataServiceProvider
-                .getItem('roles', member.role)
-                .subscribe(data => {
-                    if (data.name !== undefined) {
-                        this.currentRole = data.name;
-                        this.setLocalStorage(
-                            this.currentRole,
-                            this.member.email,
-                            this.member.team
-                        );
-                    }
-                });
+    getIconForValue = (value) => {
+        switch (value) {
+            case 1:
+                return 'ios-nutrition-outline';
+            case 2:
+                return 'ios-pizza-outline';
+            case 3:
+                return 'ios-trophy-outline';
         }
     }
 
-    setLocalStorage = (role, username, team) => {
-        window.localStorage.setItem('role', role);
-        window.localStorage.setItem('username', username);
-        window.localStorage.setItem('team', team);
-    }
-
-    goToTeam = (team) => {
-        this.navCtrl.push(TeamPage, {
-            team: team
-        });
-    }
 }

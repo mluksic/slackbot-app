@@ -1,28 +1,55 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
+import { DataServiceProvider } from '../../app/providers/data-service/data-service';
+import { GraphUserPage } from '../graph-user/graph-user';
 
-/**
- * Generated class for the LoginMemberPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
-@IonicPage()
 @Component({
-  selector: 'page-login-member',
-  templateUrl: 'login-member.html'
+    selector: 'page-login-member',
+    templateUrl: 'login-member.html'
 })
 export class LoginMemberPage {
-  members: any;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+    members: any;
+    team: any;
+    empty = false;
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginMemberPage');
-    this.getMembers();
-  }
-  public getMembers() {
-    //API GET/teams/id/members
-    this.members = ['Janez Novek', 'Marjana Novek'];
-  }
+    constructor(
+        public navCtrl: NavController,
+        public navParams: NavParams,
+        public menuCtrl: MenuController,
+        public dataServiceProvider: DataServiceProvider
+    ) {
+        this.team = this.navParams.data.team;
+    }
+
+    ionViewDidLoad = () => {
+        this.getTeamMembers(this.team);
+    }
+
+    ionViewWillEnter = () => {
+        this.menuCtrl.enable(false);
+    }
+
+    ionViewWillLeave = () => {
+        this.menuCtrl.enable(true);
+    }
+
+    getTeamMembers = (team) => {
+        this.dataServiceProvider
+            .getCollection('teams/' + team._id + '/members')
+            .subscribe(data => {
+                if (data !== undefined) {
+                    this.members = data;
+                    this.empty = false;
+                } else {
+                    this.members = null;
+                    this.empty = true;
+                }
+            });
+    }
+
+    goToHomePage = (member) => {
+        this.navCtrl.setRoot(GraphUserPage, {
+            member: member
+        });
+    }
 }
